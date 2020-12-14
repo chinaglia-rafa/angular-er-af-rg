@@ -1,4 +1,7 @@
-# Webflap
+# webflap
+Simulador de autômatos finitos, expressões regulares e gramáticas regulares para a disciplina de LFTC do curso de Bacharelado em Ciência da Computação da FCT UNESP.
+
+
 
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 10.1.4.
 
