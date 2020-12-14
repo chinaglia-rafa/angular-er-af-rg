@@ -2,7 +2,7 @@
 ![Maintenance](https://img.shields.io/maintenance/yes/2020?color=%23a263c2)
 [![CodeFactor](https://www.codefactor.io/repository/github/chinaglia-rafa/webflap/badge)](https://www.codefactor.io/repository/github/chinaglia-rafa/webflap)
 ![GitHub last commit](https://img.shields.io/github/last-commit/chinaglia-rafa/webflap)
-[![Open Source? Yes!](https://badgen.net/badge/Open%20Source%3F/Yes%21/blue?icon=github)](https://github.com/Naereen/badges/)
+![GitHub package.json dependency version (prod)](https://img.shields.io/github/package-json/dependency-version/chinaglia-rafa/webflap/@angular/core?label=angular)
 [![PRs Welcome](https://img.shields.io/badge/PRs-welcome-brightgreen.svg?style=flat)](http://makeapullrequest.com)
 
 # webflap
