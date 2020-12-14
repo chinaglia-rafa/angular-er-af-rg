@@ -1,7 +1,14 @@
+[![GitHub license](https://img.shields.io/github/license/chinaglia-rafa/webflap.svg)](https://github.com/chinaglia-rafa/webflap/blob/main/LICENSE)
+![Maintenance](https://img.shields.io/maintenance/yes/2020?color=%23a263c2)
+[![CodeFactor](https://www.codefactor.io/repository/github/chinaglia-rafa/webflap/badge)](https://www.codefactor.io/repository/github/chinaglia-rafa/webflap)
+[![Open Source? Yes!](https://badgen.net/badge/Open%20Source%3F/Yes%21/blue?icon=github)](https://github.com/Naereen/badges/)
+[![PRs Welcome](https://img.shields.io/badge/PRs-welcome-brightgreen.svg?style=flat)](http://makeapullrequest.com)
+
 # webflap
 Simulador de autômatos finitos, expressões regulares e gramáticas regulares para a disciplina de LFTC do curso de Bacharelado em Ciência da Computação da FCT UNESP.
 
-
+<details><summary>INFORMAÇÕES DO ANGULAR</summary>
+<p>
 
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 10.1.4.
 
@@ -28,3 +35,4 @@ Run `ng e2e` to execute the end-to-end tests via [Protractor](http://www.protrac
 ## Further help
 
 To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI README](https://github.com/angular/angular-cli/blob/master/README.md).
+</p></details>
