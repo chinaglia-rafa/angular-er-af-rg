@@ -8,6 +8,10 @@
 # webflap
 Simulador de autômatos finitos, expressões regulares e gramáticas regulares para a disciplina de LFTC do curso de Bacharelado em Ciência da Computação da FCT UNESP.
 
+## Deploy
+
+Para fazer o deploy da aplicação, use o comando `ng deploy --base-href=/webflap/`. Você poderá verificar a publicação no endereço [https://chinaglia-rafa.github.io/webflap/](https://chinaglia-rafa.github.io/webflap/) quando o GitHub finalizar o processamento das pages.
+
 <details><summary>INFORMAÇÕES DO ANGULAR</summary>
 <p>
 

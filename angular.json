@@ -121,8 +121,16 @@
               "devServerTarget": "webflap:serve:production"
             }
           }
+        },
+        "deploy": {
+          "builder": "angular-cli-ghpages:deploy",
+          "options": {}
         }
       }
-    }},
-  "defaultProject": "webflap"
+    }
+  },
+  "defaultProject": "webflap",
+  "cli": {
+    "analytics": "ae931f0a-ff2d-4be3-9727-ee1ab74fefb4"
+  }
 }
