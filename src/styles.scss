@@ -1,1 +1,16 @@
 /* You can add global styles to this file, and also import other style files */
+
+html, body { height: 100%; }
+body {
+  margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif;
+  --color-primary: #7b1fa2;
+  --color-accent: #69f0ae;
+}
+@font-face {
+  font-family: "oswald";
+  src: url("./assets/fonts/Oswald-VariableFont_wght.ttf") format("opentype");
+}
+@font-face {
+  font-family: "oswald-light";
+  src: url("./assets/fonts/Oswald-ExtraLight.ttf") format("opentype");
+}
