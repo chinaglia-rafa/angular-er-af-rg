@@ -1,7 +1,8 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewEncapsulation } from '@angular/core';
 import { FormControl, FormGroupDirective, NgForm, Validators } from '@angular/forms';
 import { ErrorStateMatcher } from '@angular/material/core';
 import { Grammar, GrammarRule } from 'src/app/models/grammar.model';
+import { RegularGrammarsService } from 'src/app/services/regular-grammars.service';
 
 /** Error when invalid control is dirty, touched, or submitted. */
 export class MyErrorStateMatcher implements ErrorStateMatcher {
@@ -14,7 +15,7 @@ export class MyErrorStateMatcher implements ErrorStateMatcher {
 @Component({
   selector: 'app-regular-grammars-view',
   templateUrl: './regular-grammars-view.component.html',
-  styleUrls: ['./regular-grammars-view.component.scss']
+  styleUrls: ['./regular-grammars-view.component.scss'],
 })
 export class RegularGrammarsViewComponent implements OnInit {
 
@@ -27,11 +28,10 @@ export class RegularGrammarsViewComponent implements OnInit {
 
   matcher = new MyErrorStateMatcher();
 
-  currentGrammar = new Grammar('', 'S');
-
-  constructor() { }
+  constructor(public regularGrammarsService: RegularGrammarsService) { }
 
   ngOnInit(): void {
+    this.regularGrammarsService.newGrammar('Gramática sem nome', 'S');
   }
 
   /**
@@ -42,6 +42,9 @@ export class RegularGrammarsViewComponent implements OnInit {
   **/
   addToGrammar(left:any, right: any): boolean {
     if (!this.leftFormControl.valid || !this.rightFormControl.valid || right.value == '') return false;
+    if (!this.regularGrammarsService.currentGrammar) {
+      this.regularGrammarsService.newGrammar('Gramática sem nome', 'S');
+    }
     console.log(left.value, right.value);
     let rule = new GrammarRule();
     rule.setLeft(left.value);
@@ -50,7 +53,9 @@ export class RegularGrammarsViewComponent implements OnInit {
       rule.addRight(derivation);
     }
 
-    this.currentGrammar.rules.push(rule);
+    this.regularGrammarsService.currentGrammar.rules.push(rule);
+
+    this.regularGrammarsService.currentGrammar.generateDefinition();
     right.value = '';
     left.value = '';
     left.focus();

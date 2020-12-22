@@ -10,10 +10,13 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatInputModule } from '@angular/material/input';
 import { MatButtonModule } from '@angular/material/button';
+import { MatChipsModule } from '@angular/material/chips';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { FormatGrammarPipe } from './pipes/format-grammar.pipe';
 import { RegularGrammarsViewComponent } from './components/regular-grammars/regular-grammars-view/regular-grammars-view.component';
 import { RegularGrammarsListComponent } from './components/regular-grammars/regular-grammars-list/regular-grammars-list.component';
+import { DateAgoPipe } from './pipes/date-ago.pipe';
+import { MatTooltipModule } from '@angular/material/tooltip';
 
 
 @NgModule({
@@ -22,7 +25,8 @@ import { RegularGrammarsListComponent } from './components/regular-grammars/regu
     routingComponents,
     FormatGrammarPipe,
     RegularGrammarsViewComponent,
-    RegularGrammarsListComponent
+    RegularGrammarsListComponent,
+    DateAgoPipe
   ],
   imports: [
     BrowserModule,
@@ -36,6 +40,8 @@ import { RegularGrammarsListComponent } from './components/regular-grammars/regu
     MatButtonModule,
     FormsModule,
     ReactiveFormsModule,
+    MatChipsModule,
+    MatTooltipModule,
   ],
   providers: [],
   bootstrap: [AppComponent]

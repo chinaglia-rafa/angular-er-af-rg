@@ -1,1 +1,36 @@
-<p>regular-grammars-list works!</p>
+<h1>GRAMÁTICAS SALVAS</h1>
+<mat-selection-list class="noselect" [multiple]="false" >
+  <mat-list-option [selected]="this.regularGrammarsService.currentGrammarIndex === i" *ngFor="let grammar of this.regularGrammarsService.grammars; let i = index" (click)="this.regularGrammarsService.select(i)">
+    <mat-icon mat-list-icon>grading</mat-icon>
+    <div mat-line>
+      {{ grammar.title }}
+      <div class="date"
+        #tooltip="matTooltip"
+        matTooltipPosition="below"
+        [matTooltip]="grammar.modified | date: 'dd/MM/yyyy HH:mm:SS'"
+        matTooltipShowDelay="800"
+        matTooltipClass="tooltip"
+      >
+        {{ grammar.modified | dateAgo }}
+      </div>
+    </div>
+    <!-- <button class="btn-delete" type="button" mat-icon-button >
+      <mat-icon aria-label="Excluir gramática" class="icon-outline">delete</mat-icon>
+    </button> -->
+    <div mat-line
+      #tooltip="matTooltip"
+      matTooltipPosition="below"
+      [matTooltip]="grammar.definition"
+      matTooltipShowDelay="800"
+      matTooltipClass="tooltip"
+    >
+      {{ grammar.definition }}
+    </div>
+  </mat-list-option>
+  <mat-list-item>
+    <button mat-flat-button (click)="this.regularGrammarsService.newGrammar('Gramática sem nome', 'S')">
+      <mat-icon >add</mat-icon>
+      Criar nova gramática
+    </button>
+  </mat-list-item>
+</mat-selection-list>

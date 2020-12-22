@@ -45,10 +45,30 @@ export class Grammar {
   rules: GrammarRule[] = [];
   /** Símbolo inicial da gramática */
   initial: string;
+  /** Data da última modificação da gramática */
+  modified: Date = new Date();
+  definition: string = '';
 
   constructor(title: string, initial: string) {
     this.title = title;
     this.initial = initial || 'S';
+  }
+
+  generateDefinition() {
+    /** G = ({S, A}, {a, b}, P, S) */
+    let terminals = [];
+    let nonTerminals = [];
+    for (let rule of this.rules) {
+      if (nonTerminals.indexOf(rule.left) == -1) nonTerminals.push(rule.left);
+      for (let part of rule.right) {
+        for (let symbol of part.split("")) {
+          if (symbol.toLowerCase() != symbol) continue;
+          if (terminals.indexOf(symbol) == -1) terminals.push(symbol);
+        }
+      }
+    }
+    this.definition = `G = ({${nonTerminals.join(", ")}}, {${terminals.join(", ")}}, P, ${this.initial})`;
+    console.log(this.definition);
   }
 
   /**
@@ -60,6 +80,10 @@ export class Grammar {
     if (index < 0 || index >= this.rules.length)
       throw Error("Índice fora da range de rules.");
 
-    return this.rules.splice(index, 1)[0];
+    let removed = this.rules.splice(index, 1)[0];
+
+    this.generateDefinition();
+
+    return removed
   }
 }
