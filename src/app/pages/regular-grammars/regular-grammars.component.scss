@@ -1,7 +1,7 @@
 h1 {
   font-family: oswald;
   font-size: 70px;
-  height: 70px;
+  min-height: 70px;
   line-height: initial;
   margin-bottom: 30px;
   color: var(--color-accent);
@@ -10,8 +10,19 @@ p {
   font-family: 'oswald-light';
   font-weight: lighter;
   font-size: 2em;
+  line-height: 1em;
 }
 
 .content {
   padding: 8px;
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.content .header {
+  width: 100%;
+}
+
+app-regular-grammars-view {
+  width: 50%;
 }

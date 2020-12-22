@@ -1,5 +1,5 @@
 <mat-drawer-container hasBackdrop="true" class="nav-container" autosize>
-  <mat-drawer #drawer class="sidenav" mode="side">
+  <mat-drawer #drawer class="sidenav noselect" mode="side">
     <h1>Menu</h1>
     <mat-nav-list role="list">
       <mat-list-item *ngFor="let item of menu" role="listitem" [routerLink]="item.link" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }">
@@ -10,7 +10,7 @@
   </mat-drawer>
 
   <div class="content">
-    <mat-toolbar color="primary">
+    <mat-toolbar color="primary" class="noselect">
        <button mat-icon-button (click)="drawer.toggle()" color="accent" class="menu-icon" aria-label="Abrir menu">
         <mat-icon>menu</mat-icon>
       </button>
