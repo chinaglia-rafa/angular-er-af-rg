@@ -23,7 +23,20 @@ p {
   width: 100%;
 }
 
-// app-regular-grammars-view,
+app-regular-grammars-view,
 app-regular-grammars-list {
-  width: 48%;
+  width: 100%;
+}
+
+app-regular-grammars-view { order: 2; }
+app-regular-grammars-list { order: 1; margin-top: 30px; }
+
+@media screen and (min-width: 1024px) {
+  app-regular-grammars-view,
+  app-regular-grammars-list {
+    width: 48%;
+  }
+
+  app-regular-grammars-view { order: 1; }
+  app-regular-grammars-list { order: 2; margin-top: 0px; }
 }

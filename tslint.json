@@ -4,6 +4,7 @@
     "codelyzer"
   ],
   "rules": {
+    "ordered-imports": false,
     "align": {
       "options": [
         "parameters",
@@ -11,6 +12,7 @@
       ]
     },
     "array-type": false,
+    "forin": false,
     "arrow-return-shorthand": true,
     "curly": true,
     "deprecation": {

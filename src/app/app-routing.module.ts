@@ -1,5 +1,5 @@
 import { NgModule } from '@angular/core';
-import { Routes, RouterModule } from '@angular/router';
+import { RouterModule, Routes } from '@angular/router';
 import { FiniteAutomatonComponent } from './pages/finite-automaton/finite-automaton.component';
 import { RegularExpressionsComponent } from './pages/regular-expressions/regular-expressions.component';
 import { RegularGrammarsComponent } from './pages/regular-grammars/regular-grammars.component';
@@ -11,8 +11,8 @@ const routes: Routes = [
 ];
 
 @NgModule({
+  exports: [RouterModule],
   imports: [RouterModule.forRoot(routes)],
-  exports: [RouterModule]
 })
 export class AppRoutingModule { }
 
@@ -20,5 +20,5 @@ export class AppRoutingModule { }
 export const routingComponents = [
   RegularExpressionsComponent,
   RegularGrammarsComponent,
-  FiniteAutomatonComponent
-]
+  FiniteAutomatonComponent,
+];

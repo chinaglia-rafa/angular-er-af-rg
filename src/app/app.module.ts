@@ -20,8 +20,8 @@ import { MatTooltipModule } from '@angular/material/tooltip';
 import { MatDialogModule } from '@angular/material/dialog';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
 
-
 @NgModule({
+  bootstrap: [AppComponent],
   declarations: [
     AppComponent,
     routingComponents,
@@ -31,6 +31,7 @@ import { MatSnackBarModule } from '@angular/material/snack-bar';
     DateAgoPipe,
     DialogContentConfirmDeleteDialog,
   ],
+  entryComponents: [DialogContentConfirmDeleteDialog],
   imports: [
     BrowserModule,
     AppRoutingModule,
@@ -48,8 +49,6 @@ import { MatSnackBarModule } from '@angular/material/snack-bar';
     MatDialogModule,
     MatSnackBarModule,
   ],
-  entryComponents: [DialogContentConfirmDeleteDialog],
   providers: [],
-  bootstrap: [AppComponent]
 })
 export class AppModule { }

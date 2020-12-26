@@ -3,30 +3,26 @@ import { MatDialog } from '@angular/material/dialog';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { RegularGrammarsService } from 'src/app/services/regular-grammars/regular-grammars.service';
 
-
 @Component({
   selector: 'app-regular-grammars-list',
+  styleUrls: ['./regular-grammars-list.component.scss'],
   templateUrl: './regular-grammars-list.component.html',
-  styleUrls: ['./regular-grammars-list.component.scss']
 })
 export class RegularGrammarsListComponent implements OnInit {
 
-  testDate = new Date("2020-12-22T09:48:00");
-  testDate2 = new Date();
-
   constructor(
     public regularGrammarsService: RegularGrammarsService,
-    private _matDialog: MatDialog,
-    private _snackBar: MatSnackBar,
+    private matDialog: MatDialog,
+    private snackBar: MatSnackBar,
   ) { }
 
-  openDialog(index: number) {
-    const dialogRef = this._matDialog.open(DialogContentConfirmDeleteDialog);
+  public openDialog(index: number): void {
+    const dialogRef = this.matDialog.open(DialogContentConfirmDeleteDialog);
 
-    dialogRef.afterClosed().subscribe(result => {
+    dialogRef.afterClosed().subscribe((result: any) => {
       if (result === true) {
         if (this.regularGrammarsService.remove(index)) {
-          let snackBarRef = this._snackBar.open("Gramática excluída com sucesso.", "Desfazer", {
+          const snackBarRef = this.snackBar.open('Gramática excluída com sucesso.', 'Desfazer', {
             duration: 5000,
           });
           snackBarRef.onAction().subscribe(() => {
@@ -37,7 +33,7 @@ export class RegularGrammarsListComponent implements OnInit {
     });
   }
 
-  ngOnInit(): void {
+  public ngOnInit(): void {
   }
 
 }
