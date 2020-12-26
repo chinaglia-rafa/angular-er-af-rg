@@ -1,8 +1,8 @@
-import { Component, OnInit, ViewEncapsulation } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroupDirective, NgForm, Validators } from '@angular/forms';
 import { ErrorStateMatcher } from '@angular/material/core';
-import { Grammar, GrammarRule } from 'src/app/models/grammar.model';
-import { RegularGrammarsService } from 'src/app/services/regular-grammars.service';
+import { GrammarRule } from 'src/app/models/grammar.model';
+import { RegularGrammarsService } from 'src/app/services/regular-grammars/regular-grammars.service';
 
 /** Error when invalid control is dirty, touched, or submitted. */
 export class MyErrorStateMatcher implements ErrorStateMatcher {
@@ -60,7 +60,14 @@ export class RegularGrammarsViewComponent implements OnInit {
     left.value = '';
     left.focus();
 
+    this.regularGrammarsService.saveAll();
+
     return true;
+  }
+
+  removeFromGrammar(index: number) {
+    this.regularGrammarsService.currentGrammar.remove(index);
+    this.regularGrammarsService.saveAll();
   }
 
   addEpsilon(obj: any) {

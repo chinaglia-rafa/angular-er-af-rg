@@ -18,7 +18,11 @@ div[mat-line]:nth-child(1) {
   display: flex;
   flex-wrap: nowrap;
   align-items: center;
-  justify-content: space-between;
+  justify-content: flex-end;
+}
+
+.grammar-title {
+  width: 100%;
 }
 
 .date {

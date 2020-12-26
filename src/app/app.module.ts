@@ -14,9 +14,11 @@ import { MatChipsModule } from '@angular/material/chips';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { FormatGrammarPipe } from './pipes/format-grammar.pipe';
 import { RegularGrammarsViewComponent } from './components/regular-grammars/regular-grammars-view/regular-grammars-view.component';
-import { RegularGrammarsListComponent } from './components/regular-grammars/regular-grammars-list/regular-grammars-list.component';
+import { DialogContentConfirmDeleteDialog, RegularGrammarsListComponent } from './components/regular-grammars/regular-grammars-list/regular-grammars-list.component';
 import { DateAgoPipe } from './pipes/date-ago.pipe';
 import { MatTooltipModule } from '@angular/material/tooltip';
+import { MatDialogModule } from '@angular/material/dialog';
+import { MatSnackBarModule } from '@angular/material/snack-bar';
 
 
 @NgModule({
@@ -26,7 +28,8 @@ import { MatTooltipModule } from '@angular/material/tooltip';
     FormatGrammarPipe,
     RegularGrammarsViewComponent,
     RegularGrammarsListComponent,
-    DateAgoPipe
+    DateAgoPipe,
+    DialogContentConfirmDeleteDialog,
   ],
   imports: [
     BrowserModule,
@@ -42,7 +45,10 @@ import { MatTooltipModule } from '@angular/material/tooltip';
     ReactiveFormsModule,
     MatChipsModule,
     MatTooltipModule,
+    MatDialogModule,
+    MatSnackBarModule,
   ],
+  entryComponents: [DialogContentConfirmDeleteDialog],
   providers: [],
   bootstrap: [AppComponent]
 })
