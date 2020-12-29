@@ -72,3 +72,20 @@ mat-divider {
 .title-bar {
   display: flex;
 }
+
+.test-row {
+  display: flex;
+  flex-wrap: nowrap;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.test-row>* {
+  margin: 0 8px;
+}
+
+.test-row app-regular-grammars-test {
+  flex-grow: 1;
+  position: relative;
+  top:  13px;
+}

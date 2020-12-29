@@ -37,9 +37,19 @@ export class GrammarRule {
 
     return this.right.splice(index, 1)[0];
   }
+
+  public deserialize(input: any): GrammarRule {
+    Object.assign(this, input);
+    return this;
+  }
 }
 
-/** Classe referente a uma gramática regular */
+/** ****************************************
+ *  ****************************************
+ *  Classe referente a uma gramática regular
+ *  ****************************************
+ *  ****************************************
+ */
 export class Grammar {
   /** Nome da gramática para referência do usuário */
   public title: string;
@@ -51,9 +61,21 @@ export class Grammar {
   public modified: Date = new Date();
   public definition = '';
 
-  constructor(title: string, initial: string) {
-    this.title = title;
+  constructor(title?: string, initial?: string) {
+    this.title = title || '';
     this.initial = initial || 'S';
+  }
+
+  /** TODO: Corrigir a forma com que são instanciados esses objetos */
+  public deserialize(input: any): Grammar {
+    const rules = input.rules;
+    input.rules = [];
+    for (const rule of rules) {
+      input.rules.push(new GrammarRule().deserialize(rule));
+    }
+    Object.assign(this, input);
+    this.modified = new Date(input.modified);
+    return this;
   }
 
   public generateDefinition(): void {
@@ -69,7 +91,8 @@ export class Grammar {
           if (symbol.toLowerCase() !== symbol) {
             continue;
           }
-          if (terminals.indexOf(symbol) === -1) {
+          /** Note que a lista de símbolos terminais não inclui o epsilon */
+          if (terminals.indexOf(symbol) === -1 && symbol !== 'ε') {
             terminals.push(symbol);
           }
         }
@@ -94,5 +117,76 @@ export class Grammar {
     this.generateDefinition();
 
     return removed;
+  }
+
+  /**
+   * Mergulha em um símbolo não terminal e o deriva.
+   * @param str cadeia a ser testada
+   * @param index índice atual sendo processado
+   * @param currentNotTerminal caractere não terminal sendo processado
+   * @return true se a cadeia pertencer à gramática, false caso contrário.
+   */
+  public dive(str: string, index?: number, currentNotTerminal?: string): boolean {
+    if (!currentNotTerminal || currentNotTerminal === '') { currentNotTerminal = this.initial; }
+    if (!index) { index = 0; }
+    if (index > str.length) {
+      console.log('Solução rejeitada. Cadeia chegou ao final. (Possível bug com epsilon...)');
+      return false;
+    }
+    console.log('Begin testing');
+
+    console.log('At char', str[index] + '(' + index + ')', 'from string', str);
+
+    let done = false;
+
+    /** Procurando regras que condizem com o currentNotTerminal  */
+    for (const rule of this.rules) {
+      if (rule.left !== currentNotTerminal) { continue; }
+      console.log('Regra para', currentNotTerminal, 'encontrada. Hora de derivar');
+      /** Verificando cada derivação da regra encontrada */
+      for (const derivation of rule.right) {
+        /** Índice sendo alcançado pela derivação atual */
+        let currentIndex = index;
+        for (const symbol of derivation) {
+          if (this.isNonTerminal(symbol)) {
+            console.log('Símbolo não terminal', symbol, 'encontrado. Indo nele recursivamente com', str, currentIndex, symbol);
+            done = this.dive(str, currentIndex, symbol);
+            if (done) { return true; }
+          } else if (symbol === str[currentIndex]) {
+            console.log('Char', symbol, 'encontrado em', derivation, 'de', rule.left, 'Ass.:', str, index, currentNotTerminal);
+            currentIndex++;
+            done = currentIndex === str.length;
+          } else if (symbol === 'ε') {
+            if (str === '') {
+              console.log('Cadeia vazia permitida. A cadeia é válida.');
+              return true;
+            }
+            done = currentIndex === str.length;
+            console.log('Símbolo "ε" encontrado. Se a cadeia estiver completa (', done, '), então done = true');
+          } else {
+            console.log('Nesse caso, o símbolo atual da derivação não condiz com o próximo da cadeia. Abortar Derivação.');
+            done = false;
+            break;
+          }
+        }
+      }
+    }
+    console.log('Recursão com assinatura', str, index, currentNotTerminal, 'concluída. Resultado =', done);
+    return done;
+  }
+
+  /**
+   * Testa se uma cadeia pertence à gramática
+   * @param str cadeia a ser testada
+   * @param index índice atual sendo processado
+   * @param currentNotTerminal caractere não terminal sendo processado
+   * @return Promise que resolve true se a cadeia pertencer à gramática, false caso contrário.
+   */
+  public async test(str: string, index?: number, currentNotTerminal?: string): Promise<boolean> {
+    return await this.dive(str, index, currentNotTerminal);
+  }
+
+  private isNonTerminal(symbol: string): boolean {
+    return /[A-Z]/.test(symbol);
   }
 }

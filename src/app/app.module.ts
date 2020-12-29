@@ -19,6 +19,9 @@ import { DateAgoPipe } from './pipes/date-ago.pipe';
 import { MatTooltipModule } from '@angular/material/tooltip';
 import { MatDialogModule } from '@angular/material/dialog';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
+import { RegularGrammarsTestComponent } from './components/regular-grammars/regular-grammars-test/regular-grammars-test.component';
+import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
+import { RegularGrammarsTestManyComponent } from './components/regular-grammars/regular-grammars-test-many/regular-grammars-test-many.component';
 
 @NgModule({
   bootstrap: [AppComponent],
@@ -30,6 +33,8 @@ import { MatSnackBarModule } from '@angular/material/snack-bar';
     RegularGrammarsListComponent,
     DateAgoPipe,
     DialogContentConfirmDeleteDialog,
+    RegularGrammarsTestComponent,
+    RegularGrammarsTestManyComponent,
   ],
   entryComponents: [DialogContentConfirmDeleteDialog],
   imports: [
@@ -48,6 +53,7 @@ import { MatSnackBarModule } from '@angular/material/snack-bar';
     MatTooltipModule,
     MatDialogModule,
     MatSnackBarModule,
+    MatProgressSpinnerModule,
   ],
   providers: [],
 })

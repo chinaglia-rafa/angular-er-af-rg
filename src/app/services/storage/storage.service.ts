@@ -23,14 +23,13 @@ export class StorageService {
         return [];
       }
       grammars = JSON.parse(grammars);
-      grammars.map(((grammar) => {
-        grammar = grammar as Grammar;
-        grammar.rules.map((rule) => {
-          return rule as GrammarRule;
-        });
-        return grammar;
-      }));
+      const parsedGrammars = [];
+      while (grammars.length > 0) {
+        const grammar = grammars.pop();
+        parsedGrammars.unshift(new Grammar().deserialize(grammar));
+      }
 
-      return grammars;
+      console.log('grammars loaded are', parsedGrammars);
+      return parsedGrammars;
   }
 }

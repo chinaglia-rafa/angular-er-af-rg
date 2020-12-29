@@ -1,8 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroupDirective, NgForm, Validators } from '@angular/forms';
 import { ErrorStateMatcher } from '@angular/material/core';
+import { MatDialog } from '@angular/material/dialog';
 import { GrammarRule } from 'src/app/models/grammar.model';
 import { RegularGrammarsService } from 'src/app/services/regular-grammars/regular-grammars.service';
+import { RegularGrammarsTestManyComponent } from '../regular-grammars-test-many/regular-grammars-test-many.component';
 
 /** Error when invalid control is dirty, touched, or submitted. */
 export class MyErrorStateMatcher implements ErrorStateMatcher {
@@ -28,7 +30,10 @@ export class RegularGrammarsViewComponent implements OnInit {
 
   public matcher = new MyErrorStateMatcher();
 
-  constructor(public regularGrammarsService: RegularGrammarsService) { }
+  constructor(
+    public regularGrammarsService: RegularGrammarsService,
+    private matDialog: MatDialog,
+  ) { }
 
   public ngOnInit(): void {
     this.regularGrammarsService.newGrammar('Gramática sem nome', 'S');
@@ -102,6 +107,16 @@ export class RegularGrammarsViewComponent implements OnInit {
     obj.value = obj.value.replaceAll('|ε',  '');
 
     return true;
+  }
+
+  public openDialogTestMany(): void {
+    const dialogRef = this.matDialog.open(RegularGrammarsTestManyComponent, {
+      width: '600px',
+    });
+
+    dialogRef.afterClosed().subscribe((result: any) => {
+      if (result === true) { }
+    });
   }
 
 }

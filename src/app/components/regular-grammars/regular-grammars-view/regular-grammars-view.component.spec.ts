@@ -8,7 +8,7 @@ describe('RegularGrammarsViewComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ RegularGrammarsViewComponent ]
+      declarations: [ RegularGrammarsViewComponent ],
     })
     .compileComponents();
   });
