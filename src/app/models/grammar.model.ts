@@ -183,7 +183,7 @@ export class Grammar {
    * @return Promise que resolve true se a cadeia pertencer à gramática, false caso contrário.
    */
   public async test(str: string, index?: number, currentNotTerminal?: string): Promise<boolean> {
-    return await this.dive(str, index, currentNotTerminal);
+    return this.dive(str, index, currentNotTerminal);
   }
 
   private isNonTerminal(symbol: string): boolean {

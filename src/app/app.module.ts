@@ -22,6 +22,9 @@ import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { RegularGrammarsTestComponent } from './components/regular-grammars/regular-grammars-test/regular-grammars-test.component';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { RegularGrammarsTestManyComponent } from './components/regular-grammars/regular-grammars-test-many/regular-grammars-test-many.component';
+import { FiniteAutomatonViewComponent } from './components/finite-automaton/finite-automaton-view/finite-automaton-view.component';
+import { NgxGraphModule } from '@swimlane/ngx-graph';
+import { MatMenuModule } from '@angular/material/menu';
 
 @NgModule({
   bootstrap: [AppComponent],
@@ -35,6 +38,7 @@ import { RegularGrammarsTestManyComponent } from './components/regular-grammars/
     DialogContentConfirmDeleteDialog,
     RegularGrammarsTestComponent,
     RegularGrammarsTestManyComponent,
+    FiniteAutomatonViewComponent,
   ],
   entryComponents: [DialogContentConfirmDeleteDialog],
   imports: [
@@ -54,6 +58,8 @@ import { RegularGrammarsTestManyComponent } from './components/regular-grammars/
     MatDialogModule,
     MatSnackBarModule,
     MatProgressSpinnerModule,
+    NgxGraphModule,
+    MatMenuModule,
   ],
   providers: [],
 })
