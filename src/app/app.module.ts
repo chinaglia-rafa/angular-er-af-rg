@@ -27,6 +27,7 @@ import { NgxGraphModule } from '@swimlane/ngx-graph';
 import { MatMenuModule } from '@angular/material/menu';
 import { FiniteAutomatonListComponent } from './components/finite-automaton/finite-automaton-list/finite-automaton-list.component';
 import { FiniteAutomatonTestComponent } from './components/finite-automaton/finite-automaton-test/finite-automaton-test.component';
+import { FiniteAutomatonTestManyComponent } from './components/finite-automaton/finite-automaton-test-many/finite-automaton-test-many.component';
 
 @NgModule({
   bootstrap: [AppComponent],
@@ -43,6 +44,7 @@ import { FiniteAutomatonTestComponent } from './components/finite-automaton/fini
     FiniteAutomatonViewComponent,
     FiniteAutomatonListComponent,
     FiniteAutomatonTestComponent,
+    FiniteAutomatonTestManyComponent,
   ],
   entryComponents: [DialogContentConfirmDeleteDialog],
   imports: [

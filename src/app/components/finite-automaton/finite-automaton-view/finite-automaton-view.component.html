@@ -2,7 +2,16 @@
   <mat-label>Digite o nome do autômato finito</mat-label>
   <input #automatonTitle [value]="finiteAutomatonService.currentAutomaton.title" (keyup)="finiteAutomatonService.currentAutomaton.title = automatonTitle.value; finiteAutomatonService.saveAll()" placeholder="Escolha um nome para o autômato finito" matInput type="text">
 </mat-form-field>
-<app-finite-automaton-test></app-finite-automaton-test>
+<mat-divider></mat-divider>
+<div class="test-row">
+  <app-finite-automaton-test></app-finite-automaton-test>
+  <div>ou</div>
+  <button mat-flat-button (click)="openDialogTestMany()">
+    <mat-icon>reorder</mat-icon>
+    Testar várias
+  </button>
+</div>
+<mat-divider></mat-divider>
 <section class="action-buttons">
   <button [disabled]="selectionMode" mat-flat-button color="primary" (click)="add($event)">
     <mat-icon>add</mat-icon>

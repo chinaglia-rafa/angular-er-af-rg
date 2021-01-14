@@ -52,3 +52,20 @@ mat-icon {
 .form-field--big {
   font-size: 1.5em;
 }
+
+.test-row {
+  display: flex;
+  flex-wrap: nowrap;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.test-row>* {
+  margin: 0 8px;
+}
+
+.test-row app-finite-automaton-test {
+  flex-grow: 1;
+  position: relative;
+  top:  13px;
+}

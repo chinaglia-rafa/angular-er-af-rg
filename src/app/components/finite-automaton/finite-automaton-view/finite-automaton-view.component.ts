@@ -5,6 +5,8 @@ import { AutomatonLink, AutomatonNode } from 'src/app/models/finite-automaton.mo
 import * as shape from 'd3-shape';
 import { MatMenuTrigger } from '@angular/material/menu';
 import { FiniteAutomatonService } from 'src/app/services/finite-automaton/finite-automaton.service';
+import { FiniteAutomatonTestManyComponent } from '../finite-automaton-test-many/finite-automaton-test-many.component';
+import { MatDialog } from '@angular/material/dialog';
 
 @Component({
   selector: 'app-finite-automaton-view',
@@ -39,6 +41,7 @@ export class FiniteAutomatonViewComponent implements OnInit {
 
   constructor(
     private snackBar: MatSnackBar,
+    private matDialog: MatDialog,
     public finiteAutomatonService: FiniteAutomatonService,
   ) { }
 
@@ -229,7 +232,7 @@ export class FiniteAutomatonViewComponent implements OnInit {
     console.log('node', node);
     const c = !node.initial;
 
-    this.nodes.map((item: any) => {
+    this.finiteAutomatonService.currentAutomaton.nodes.map((item: any) => {
       item.initial = false;
       return item;
     });
@@ -245,5 +248,15 @@ export class FiniteAutomatonViewComponent implements OnInit {
     node.final = !node.final;
 
     return node.final;
+  }
+
+  public openDialogTestMany(): void {
+    const dialogRef = this.matDialog.open(FiniteAutomatonTestManyComponent, {
+      width: '600px',
+    });
+
+    dialogRef.afterClosed().subscribe((result: any) => {
+      if (result === true) { }
+    });
   }
 }
