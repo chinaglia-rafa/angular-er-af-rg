@@ -239,6 +239,8 @@ export class FiniteAutomatonViewComponent implements OnInit {
 
     node.initial = c;
 
+    this.finiteAutomatonService.saveAll();
+
     return node.initial;
   }
 
@@ -246,6 +248,8 @@ export class FiniteAutomatonViewComponent implements OnInit {
   public toggleFinal(node: any): boolean {
 
     node.final = !node.final;
+
+    this.finiteAutomatonService.saveAll();
 
     return node.final;
   }
