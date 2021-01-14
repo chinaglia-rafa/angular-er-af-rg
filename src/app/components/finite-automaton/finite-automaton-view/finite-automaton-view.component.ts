@@ -4,6 +4,7 @@ import { Subject } from 'rxjs';
 import { AutomatonLink, AutomatonNode } from 'src/app/models/finite-automaton.model';
 import * as shape from 'd3-shape';
 import { MatMenuTrigger } from '@angular/material/menu';
+import { FiniteAutomatonService } from 'src/app/services/finite-automaton/finite-automaton.service';
 
 @Component({
   selector: 'app-finite-automaton-view',
@@ -38,14 +39,16 @@ export class FiniteAutomatonViewComponent implements OnInit {
 
   constructor(
     private snackBar: MatSnackBar,
+    public finiteAutomatonService: FiniteAutomatonService,
   ) { }
 
   public add(event: any): void {
-    this.nodes.push({
+    console.log('hello?', this.finiteAutomatonService.currentAutomaton);
+    this.finiteAutomatonService.currentAutomaton.nodes.push({
       final: false,
-      id: 'node-' + this.nodes.length.toString(),
+      id: 'node-' + this.finiteAutomatonService.currentAutomaton.nodes.length.toString(),
       initial: false,
-      label: 'q' + this.nodes.length.toString(),
+      label: 'q' + this.finiteAutomatonService.currentAutomaton.nodes.length.toString(),
       selected: false,
     } as AutomatonNode);
 
@@ -57,7 +60,7 @@ export class FiniteAutomatonViewComponent implements OnInit {
   private selectionModeStart(subject: string, count: number): void {
     if (subject) { this.subject = subject; }
     this.selectionCount = count;
-    let text;
+    let text: string;
     if (subject === 'add-transition') {
       text = 'Escolha os estados de origem e destino.';
     } else if (subject === 'remove-element') {
@@ -102,8 +105,10 @@ export class FiniteAutomatonViewComponent implements OnInit {
   }
 
   public refresh(): void {
-    this.nodes = [...this.nodes];
-    this.links = [...this.links];
+    this.finiteAutomatonService.currentAutomaton.nodes = [...this.finiteAutomatonService.currentAutomaton.nodes];
+    this.finiteAutomatonService.currentAutomaton.links = [...this.finiteAutomatonService.currentAutomaton.links];
+
+    this.finiteAutomatonService.saveAll();
   }
 
   public selectNode(event: any, node: any): void {
@@ -129,7 +134,7 @@ export class FiniteAutomatonViewComponent implements OnInit {
         if (label.length > 1) {
           label.splice(label.indexOf(part), 1);
           link = Object.assign(link, {label: label.join(', ')});
-          this.links[this.getLinkById(link.id)] = link;
+          this.finiteAutomatonService.currentAutomaton.links[this.getLinkById(link.id)] = link;
           this.selectionModeEnd();
         } else {
           this.execute();
@@ -141,7 +146,7 @@ export class FiniteAutomatonViewComponent implements OnInit {
   /** Procura o índice de um link e o retorna */
   private getLinkById(id: string): number {
     let i = 0;
-    for (const item of this.links) {
+    for (const item of this.finiteAutomatonService.currentAutomaton.links) {
       if (item.id === id) {
         return i;
       }
@@ -160,24 +165,27 @@ export class FiniteAutomatonViewComponent implements OnInit {
         simbolo = 'λ';
       } else if (!simbolo) { this.selectionModeEnd(); return; }
       if (index !== -1) {
-        this.links[index].label += ', ' + simbolo;
+        this.finiteAutomatonService.currentAutomaton.links[index].label += ', ' + simbolo;
       } else {
         const link = new AutomatonLink();
-        link.id = `link-${ this.links.length }`;
+        link.id = `link-${ this.finiteAutomatonService.currentAutomaton.links.length }`;
         link.label = simbolo;
         link.source = this.selectedNodes[0].id;
         link.target = this.selectedNodes[1].id;
-        this.links.push(link);
+        this.finiteAutomatonService.currentAutomaton.links.push(link);
       }
     } else if (this.subject === 'remove-element') {
       console.log('deleting', this.selectedNodes[0]);
       if (this.selectedNodes[0].source !== undefined) {
-        this.links = this.links.filter((link) => link.id !== this.selectedNodes[0].id);
+        this.finiteAutomatonService.currentAutomaton.links = this.finiteAutomatonService.currentAutomaton.links.filter((link) =>
+          link.id !== this.selectedNodes[0].id);
       } else {
-        this.links = this.links.filter((link) => ![link.source, link.target].includes(this.selectedNodes[0].id));
-        this.nodes = this.nodes.filter((node) => node.id !== this.selectedNodes[0].id);
-        console.log(this.links);
-        console.log(this.nodes);
+        this.finiteAutomatonService.currentAutomaton.links = this.finiteAutomatonService.currentAutomaton.links.filter((link) =>
+          ![link.source, link.target].includes(this.selectedNodes[0].id));
+        this.finiteAutomatonService.currentAutomaton.nodes = this.finiteAutomatonService.currentAutomaton.nodes.filter((node) =>
+          node.id !== this.selectedNodes[0].id);
+        console.log(this.finiteAutomatonService.currentAutomaton.links);
+        console.log(this.finiteAutomatonService.currentAutomaton.nodes);
       }
     }
     this.selectionModeEnd();
@@ -185,7 +193,7 @@ export class FiniteAutomatonViewComponent implements OnInit {
 
   private searchLink(source: string, target: string): number {
     let index = 0;
-    for (const link of this.links) {
+    for (const link of this.finiteAutomatonService.currentAutomaton.links) {
       if (link.source === source && link.target === target) {
         return index;
       }
