@@ -25,7 +25,17 @@
     <mat-icon>remove</mat-icon>
     Remover Estado ou Transição
   </button>
-  <button [disabled]="selectionMode" mat-flat-button (click)="fitGraph(); centerGraph(); refresh();">
+  <button
+    [disabled]="selectionMode"
+    mat-flat-button
+    color="accent"
+    (click)="fitGraph(); centerGraph(); refresh();"
+    #tooltip="matTooltip"
+    matTooltipPosition="below"
+    matTooltip="Alinha, centraliza e enquadra na tela o autômato finito. (Também salva as alterações feitas!)"
+    matTooltipShowDelay="800"
+    matTooltipClass="tooltip"
+  >
     <mat-icon>scatter_plot</mat-icon>
     Centralizar e alinhar
   </button>
@@ -55,7 +65,7 @@
   layout="dagre"
   class="chart-container"
   [autoCenter]="graphOptions.autoCenter"
-  [view]="graphOptions.view"
+  style="height: 400px;"
   [showMiniMap]="graphOptions.showMiniMap"
   [links]="finiteAutomatonService.currentAutomaton.links"
   [nodes]="finiteAutomatonService.currentAutomaton.nodes"

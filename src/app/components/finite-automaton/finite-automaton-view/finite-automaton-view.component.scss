@@ -69,3 +69,7 @@ mat-icon {
   position: relative;
   top:  13px;
 }
+
+::ng-deep .ngx-charts-outer {
+  height: 400px !important;
+}

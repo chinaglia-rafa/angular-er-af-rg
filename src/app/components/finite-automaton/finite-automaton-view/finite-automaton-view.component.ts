@@ -19,7 +19,7 @@ export class FiniteAutomatonViewComponent implements OnInit {
     autoCenter: false,
     curve: shape.curveCardinal.tension(-1),
     showMiniMap: true,
-    view: [750, 750],
+    view: [, 400],
   };
 
   public zoomToFit$: Subject<boolean> = new Subject();
