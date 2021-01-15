@@ -28,6 +28,11 @@ import { MatMenuModule } from '@angular/material/menu';
 import { FiniteAutomatonListComponent } from './components/finite-automaton/finite-automaton-list/finite-automaton-list.component';
 import { FiniteAutomatonTestComponent } from './components/finite-automaton/finite-automaton-test/finite-automaton-test.component';
 import { FiniteAutomatonTestManyComponent } from './components/finite-automaton/finite-automaton-test-many/finite-automaton-test-many.component';
+import { RegularExpressionsViewComponent } from './components/regular-expressions/regular-expressions-view/regular-expressions-view.component';
+import { RegularExpressionsListComponent } from './components/regular-expressions/regular-expressions-list/regular-expressions-list.component';
+import { RegularExpressionsTestComponent } from './components/regular-expressions/regular-expressions-test/regular-expressions-test.component';
+import { RegularExpressionsTestManyComponent } from './components/regular-expressions/regular-expressions-test-many/regular-expressions-test-many.component';
+import { ConvertRePipe } from './pipes/convert-re.pipe';
 
 @NgModule({
   bootstrap: [AppComponent],
@@ -45,6 +50,11 @@ import { FiniteAutomatonTestManyComponent } from './components/finite-automaton/
     FiniteAutomatonListComponent,
     FiniteAutomatonTestComponent,
     FiniteAutomatonTestManyComponent,
+    RegularExpressionsViewComponent,
+    RegularExpressionsListComponent,
+    RegularExpressionsTestComponent,
+    RegularExpressionsTestManyComponent,
+    ConvertRePipe,
   ],
   entryComponents: [DialogContentConfirmDeleteDialog],
   imports: [

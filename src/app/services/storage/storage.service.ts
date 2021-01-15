@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Automaton } from 'src/app/models/finite-automaton.model';
 import { Grammar, GrammarRule } from 'src/app/models/grammar.model';
+import { RegularExpression } from 'src/app/models/regular-expression.model';
 
 @Injectable({
   providedIn: 'root',
@@ -58,5 +59,31 @@ export class StorageService {
 
       console.log('automatons loaded are', parsedAutomatons);
       return parsedAutomatons;
+  }
+
+  /**
+   * Salva todas as expressões regulares enviadas como parâmetro
+   * @param regularExpressions lista de automatos a serem salvos
+   */
+  public saveRegularExpressions(regularExpressions: RegularExpression[]): void {
+    regularExpressions = regularExpressions.filter((item) => item.pattern !== '');
+    localStorage.setItem('webflap:regularExpressions', JSON.stringify(regularExpressions));
+  }
+
+  /** Carrega todas as expressões regulares salvas no armazenamento interno */
+  public loadRegularExpressions(): RegularExpression[] {
+      let regularExpressions: any = localStorage.getItem('webflap:regularExpressions');
+      if (!regularExpressions || regularExpressions === '') {
+        return [];
+      }
+      regularExpressions = JSON.parse(regularExpressions);
+      const parsedRegularExpressions = [];
+      while (regularExpressions.length > 0) {
+        const regularExpression = regularExpressions.pop();
+        parsedRegularExpressions.unshift(new RegularExpression().deserialize(regularExpression));
+      }
+
+      console.log('regular expressions loaded are', parsedRegularExpressions);
+      return parsedRegularExpressions;
   }
 }
