@@ -89,6 +89,7 @@ export class Automaton {
         /** Caso encontre uma transição em vazio, vá para o próximo estado ainda procurando o mesmo caractere */
         console.log('Transição em vazio λ encontrada. Verificando o estado destino.');
         done = this.dive(str, index, this.findNodeById(link.target));
+        if (done) { return true; }
       }
     }
 
