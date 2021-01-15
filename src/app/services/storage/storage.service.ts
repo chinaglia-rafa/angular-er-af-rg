@@ -22,6 +22,7 @@ export class StorageService {
    * @param automatons lista de automatos a serem salvos
    */
   public saveAutomatons(automatons: Automaton[]): void {
+    automatons = automatons.filter((item) => item.nodes.length + item.links.length > 0);
     localStorage.setItem('webflap:automatons', JSON.stringify(automatons));
   }
 
