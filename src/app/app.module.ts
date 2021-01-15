@@ -33,6 +33,7 @@ import { RegularExpressionsListComponent } from './components/regular-expression
 import { RegularExpressionsTestComponent } from './components/regular-expressions/regular-expressions-test/regular-expressions-test.component';
 import { RegularExpressionsTestManyComponent } from './components/regular-expressions/regular-expressions-test-many/regular-expressions-test-many.component';
 import { ConvertRePipe } from './pipes/convert-re.pipe';
+import { InitialComponent } from './pages/initial/initial.component';
 
 @NgModule({
   bootstrap: [AppComponent],
@@ -55,6 +56,7 @@ import { ConvertRePipe } from './pipes/convert-re.pipe';
     RegularExpressionsTestComponent,
     RegularExpressionsTestManyComponent,
     ConvertRePipe,
+    InitialComponent,
   ],
   entryComponents: [DialogContentConfirmDeleteDialog],
   imports: [
